@@ -1,22 +1,19 @@
-import React,{Fragment} from 'react';
-import {BrowserRouter as Router, 
-        Switch,
-        Route
-      } from 'react-router-dom';
+import React, { Fragment, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
-import Home from './Home'
-import Contact from './Contact';
-import Projects from "./Projects";
-import About from "./About";
+import Home from './Home';
 
-const App = () =>{
-  return(
-    
-      <Router>
-        <Fragment>
-          <Navbar />
+const Contact = lazy(() => import('./Contact'));
+const Projects = lazy(() => import('./Projects'));
+const About = lazy(() => import('./About'));
+
+const App = () => {
+  return (
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Suspense fallback={<section>Loading...</section>}>
           <Switch>
-           
             <Route path="/contact">
               <Contact />
             </Route>
@@ -26,14 +23,14 @@ const App = () =>{
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
           </Switch>
-        </Fragment>
-      </Router>
-    
-  )
-}
+        </Suspense>
+      </Fragment>
+    </Router>
+  );
+};
 
 export default App;
