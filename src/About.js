@@ -1,11 +1,11 @@
-import React from "react"
+import React, { memo } from 'react';
 
 const About = () => {
-    return(
-        <section>
-            <h2>About Page</h2>
-        </section>
-    )
-}
+  return (
+    <section>
+      <h2>About Page</h2>
+    </section>
+  );
+};
 
-export default About;
+export default memo(About);
